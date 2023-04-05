@@ -31,7 +31,7 @@
                             .map(a => a.href.split('/').pop());
                         images.forEach((image) => {
                             const img = document.createElement("img");
-                            img.src = './' + imagesPath + image;
+                            img.src = imagesPath + image; // remove './' from img.src
                             const li = document.createElement("li");
                             li.appendChild(img);
                             imageList.appendChild(li);
