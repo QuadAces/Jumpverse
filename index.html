@@ -1,43 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="index.css" />
-        
-        <title>Document</title>
-    </head>
-    <body>
-        <header></header>
-        <main>
-            <h1>JUMPVERSE</h1>
-            <h2>DESTINATIONS</h2>
-            <ul id="imageList">
-            </ul>
-        </main>
-        
-        <script defer>
-            const imageList = document.getElementById("imageList");
-            const imagesPath = "/public/";
-            for (let i = 0; i < 6; i++) {
-                fetch(imagesPath)
-                    .then(response => response.text()
-                    )
-                    .then(html => {
-                        const parser = new DOMParser();
-                        const htmlDoc = parser.parseFromString(html, 'text/html');
-                        const images = Array.from(htmlDoc.querySelectorAll('a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"]'))
-                            .map(a => a.href.split('/').pop());
-                        images.forEach((image) => {
-                            const img = document.createElement("img");
-                            img.src = imagesPath + image; // remove './' from img.src
-                            const li = document.createElement("li");
-                            li.appendChild(img);
-                            imageList.appendChild(li);
-                        });
-                    });
-            }
-        </script>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="index.css" rel="stylesheet" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>JUMPVERSE</h1>
+    <h2>DESTINATIONS</h2>
+    <ul id="fileList"></ul>
+    <script>
+      const currentUrl = window.location.href;
+      const currentPath = currentUrl.substring(0, currentUrl.lastIndexOf("/") + 1);
+      const allowedExtensions = ["html", "js", "css", "jpg", "jpeg", "png", "gif"]; // set the allowed file extensions
+      fetch(currentPath)
+        .then((response) => response.text())
+        .then((html) => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+
+          const allFiles = Array.from(htmlDoc.querySelectorAll("a[href]"))
+            .map((a) => a.href.split("/").pop())
+            .filter(
+              (file) =>
+                file !== "index.html" &&
+                allowedExtensions.some((ext) => file.endsWith("." + ext))
+            );
+console.log(allFiles);
+          // Get all images from the "images" folder
+          const allImages = Array.from(htmlDoc.querySelectorAll("img[src]"))
+            .map((img) => img.src.split("/").pop())
+            .filter((img) => img.startsWith("images/") && allowedExtensions.some((ext) => img.endsWith("." + ext)));
+
+          // Merge allFiles and allImages into one array
+          const allAssets = [...allFiles, ...allImages];
+
+          const fileList = document.getElementById("fileList");
+          allAssets.forEach((file) => {
+            const li = document.createElement("li");
+            const a = document.createElement("a");
+            a.href = currentPath + file;
+            a.textContent = file;
+            li.appendChild(a);
+            fileList.appendChild(li);
+          });
+        });
+    </script>
+  </body>
 </html>
