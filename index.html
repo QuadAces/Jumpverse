@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="index.css" />
+        <link rel="stylesheet" href="./index.css" />
 
         <title>Document</title>
     </head>
@@ -18,7 +18,7 @@
 
         <script defer>
             const imageList = document.getElementById("imageList");
-            const imagesPath = "images/";
+            const imagesPath = "./images/";
             for (let i = 0; i < 6; i++) {
                 fetch(imagesPath)
                     .then((response) => response.text())
@@ -35,7 +35,7 @@
                         ).map((a) => a.href.split("/").pop());
                         images.forEach((image) => {
                             const img = document.createElement("img");
-                            img.src = "./" + imagesPath + image;
+                            img.src = imagesPath + image;
                             const li = document.createElement("li");
                             li.appendChild(img);
                             imageList.appendChild(li);
