@@ -18,7 +18,7 @@
 
         <script defer>
            const imageList = document.getElementById("imageList");
-const imagesPath = "./images/";
+const imagesPath = window.location.origin + "/images/";
 for (let i = 0; i < 6; i++) {
     fetch(imagesPath)
         .then((response) => response.text())
@@ -42,6 +42,7 @@ for (let i = 0; i < 6; i++) {
             });
         });
 }
+
 
         </script>
     </body>
