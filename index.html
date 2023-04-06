@@ -32,7 +32,7 @@ console.log(allFiles);
           // Get all images from the "images" folder
           const allImages = Array.from(htmlDoc.querySelectorAll("img[src]"))
             .map((img) => img.src.split("/").pop())
-            .filter((img) => img.startsWith("images/") && allowedExtensions.some((ext) => img.endsWith("." + ext)));
+            .filter((img) => img.startsWith(currentPath + "images/") && allowedExtensions.some((ext) => img.endsWith("." + ext)));
 
           // Merge allFiles and allImages into one array
           const allAssets = [...allFiles, ...allImages];
