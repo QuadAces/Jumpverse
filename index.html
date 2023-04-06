@@ -17,31 +17,32 @@
         </main>
 
         <script defer>
-            const imageList = document.getElementById("imageList");
-            const imagesPath = "./images/";
-            for (let i = 0; i < 6; i++) {
-                fetch(imagesPath)
-                    .then((response) => response.text())
-                    .then((html) => {
-                        const parser = new DOMParser();
-                        const htmlDoc = parser.parseFromString(
-                            html,
-                            "text/html"
-                        );
-                        const images = Array.from(
-                            htmlDoc.querySelectorAll(
-                                'a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"]'
-                            )
-                        ).map((a) => a.href.split("/").pop());
-                        images.forEach((image) => {
-                            const img = document.createElement("img");
-                            img.src = imagesPath + image;
-                            const li = document.createElement("li");
-                            li.appendChild(img);
-                            imageList.appendChild(li);
-                        });
-                    });
-            }
+           const imageList = document.getElementById("imageList");
+const imagesPath = "./images/";
+for (let i = 0; i < 6; i++) {
+    fetch(imagesPath)
+        .then((response) => response.text())
+        .then((html) => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(
+                html,
+                "text/html"
+            );
+            const images = Array.from(
+                htmlDoc.querySelectorAll(
+                    'a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"]'
+                )
+            ).map((a) => a.href.split("/").pop());
+            images.forEach((image) => {
+                const img = document.createElement("img");
+                img.src = imagesPath + image;
+                const li = document.createElement("li");
+                li.appendChild(img);
+                imageList.appendChild(li);
+            });
+        });
+}
+
         </script>
     </body>
 </html>
