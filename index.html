@@ -17,26 +17,42 @@
 
     <script defer>
         const imageList = document.getElementById("imageList");
-        const imagesPath = window.location.origin + "/images/";
-        console.log(imagesPath);
-        fetch(imagesPath)
-            .then((response) => response.text())
-            .then((html) => {
-                const parser = new DOMParser();
-                const htmlDoc = parser.parseFromString(html, "text/html");
-                const images = Array.from(htmlDoc.querySelectorAll('a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"]')).map((a) => a.href.split("/").pop());
-                console.log(images);
-                images.forEach((image) => {
-                    const img = document.createElement("img");
-                    img.src = imagesPath + image;
-                    const li = document.createElement("li");
-                    li.appendChild(img);
-                    imageList.appendChild(li);
-                });
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+const imagesPath = window.location.origin + "/images/";
+console.log(imagesPath);
+
+const images = [
+    "1B0E83AC-31C3-40AE-B975-45398EA424D8.jpeg",
+    "1C47CD0B-2FF6-44DB-B998-D60DC3BC559F.jpeg",
+    "1E092905-E049-42AB-8F68-B85B0D773216.jpeg",
+    "21B5849E-A3D6-42D6-AC4A-2626F738DB25.jpeg",
+    "2A2DC89C-2611-49ED-A462-CED4118B868C.jpeg",
+    "467B2AC4-D42B-4DD0-9C3A-1993F429B4B9.jpeg",
+    "47C72CBA-5EAD-4397-90DF-4B2B924D191B.jpeg",
+    "6B886D18-06F8-4470-9B2F-17051575CA45.jpeg",
+    "754DED6C-9D80-436A-B8F0-84FEE41E01F3.png",
+    "7C524EC4-8CEC-49AC-9364-261A9C5DFE5A.jpeg",
+    "8590BA98-93ED-44E4-9383-0C789AD4C401.jpeg",
+    "8887D81F-0834-4902-9A12-5BE43A602A1A.jpeg",
+    "8DB29D21-4E03-4438-8029-F6A36241A123.jpeg",
+    "957E5E14-7EBD-4C94-8967-3B47E434D439.jpeg",
+    "9B5D12D0-551E-4D85-BF22-5AA7BB068D88.jpeg",
+    "AE16B428-1667-4177-8148-04494B638721.jpeg",
+    "B3D6A1F4-2B5C-43BB-B2BA-E06FBE112D69.jpeg",
+    "BD7EF8F9-7C5D-4374-81D5-09C2A6A0D365.jpeg",
+    "D9DE1A68-98F6-4842-BD47-013FC2FC2B8D.jpeg",
+    "EDC6E997-1616-4D25-8CD1-417C766C3A8E.jpeg",
+    "EDE21333-D8EB-4693-A91F-D5AA7C0D7666.jpeg",
+    "F2AC236C-53A5-4479-A844-28E623448B64.jpeg"
+];
+
+images.forEach((image) => {
+    const img = document.createElement("img");
+    img.src = imagesPath + image;
+    const li = document.createElement("li");
+    li.appendChild(img);
+    imageList.appendChild(li);
+});
+
     </script>
 </body>
 </html>
