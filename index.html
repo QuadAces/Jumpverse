@@ -19,6 +19,7 @@
         <script defer>
            const imageList = document.getElementById("imageList");
 const imagesPath = window.location.origin + "/images/";
+console.log(imagesPath);
 for (let i = 0; i < 6; i++) {
     fetch(imagesPath)
         .then((response) => response.text())
@@ -33,6 +34,7 @@ for (let i = 0; i < 6; i++) {
                     'a[href$=".jpeg"], a[href$=".png"], a[href$=".gif"]'
                 )
             ).map((a) => a.href.split("/").pop());
+            console.log(images);
             images.forEach((image) => {
                 const img = document.createElement("img");
                 img.src = imagesPath + image;
